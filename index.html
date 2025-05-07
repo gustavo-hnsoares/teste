@@ -9,17 +9,24 @@
    
     
     
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
     <script>
-   window.onload = function () {
-    google.accounts.id.initialize({
-      client_id: '963475900476-qtrtfgi2r7jnst91oqo1aae3tcvcatqa.apps.googleusercontent.com',
-      callback: handleCredentialResponse
-    });
-    const parent = document.getElementById('google_btn');
-    google.accounts.id.renderButton(parent, {theme: "filled_blue"});
-    google.accounts.id.prompt();
-  }
+
+  function handleCredentialResponse(response) {
+        console.log("Encoded JWT ID token: " + response.credential);
+      }
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id: "963475900476-qtrtfgi2r7jnst91oqo1aae3tcvcatqa.apps.googleusercontent.com"
+          callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+          document.getElementById("buttonDiv"),
+          { theme: "outline", size: "large" }  // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+      }
     </script>
+    <div id="buttonDiv"></div>
 </body>
 </html>
