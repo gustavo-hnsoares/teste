@@ -6,27 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="g_id_onload"
-     data-client_id="963475900476-qtrtfgi2r7jnst91oqo1aae3tcvcatqa.apps.googleusercontent.com"
-     data-login_uri="https://gustavo-hnsoares.github.io"
-        data-callback="handleCredentialResponse"
-     data-auto_select="true">
-</div>
+   
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <a href="#" onclick="signOut();">Sign out</a>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
-        function handleCredentialResponse(response) {
-     // decodeJwtResponse() is a custom function defined by you
-     // to decode the credential response.
-     const responsePayload = decodeJwtResponse(response.credential);
-
-     console.log("ID: " + responsePayload.sub);
-     console.log('Full Name: ' + responsePayload.name);
-     console.log('Given Name: ' + responsePayload.given_name);
-     console.log('Family Name: ' + responsePayload.family_name);
-     console.log("Image URL: " + responsePayload.picture);
-     console.log("Email: " + responsePayload.email);
+   window.onload = function () {
+    google.accounts.id.initialize({
+      client_id: '963475900476-qtrtfgi2r7jnst91oqo1aae3tcvcatqa.apps.googleusercontent.com',
+      callback: handleCredentialResponse
+    });
+    const parent = document.getElementById('google_btn');
+    google.accounts.id.renderButton(parent, {theme: "filled_blue"});
+    google.accounts.id.prompt();
   }
     </script>
 </body>
